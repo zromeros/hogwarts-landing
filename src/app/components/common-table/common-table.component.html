@@ -19,11 +19,34 @@
   </div>
 
   <div class="responsive-list" *ngIf="!loading && mobile">
-    <mat-list>
-      <mat-list-item *ngFor="let content of dataSource">
-        <span>{{ content.name }}</span>
-      </mat-list-item>
-    </mat-list>
+    <ul class="custom-ul">
+      <li
+        *ngFor="let content of dataSource"
+        class="custom-li"
+        [class.slytherin]="content.house === 'Slytherin'"
+        [class.gryffindor]="content.house === 'Gryffindor'"
+        [class.ravenclaw]="content.house === 'Ravenclaw'"
+        [class.hufflepuff]="content.house === 'Hufflepuff'"
+      >
+        <div class="circular-image">
+          <img
+            [src]="content.image"
+            alt="{{ content.name }}"
+            width="70"
+            height="70"
+            (error)="content.image = null"
+          />
+          <mat-icon *ngIf="!content.image">account_circle</mat-icon>
+        </div>
+        <div class="item-content">
+          <p>Name: {{ content.name }}</p>
+          <p>Species: {{ content.species }}</p>
+          <p>Gender: {{ content.gender }}</p>
+          <p>House: {{ content.house }}</p>
+          <p>Age: {{ getAgeFromYearOfBirth(content.yearOfBirth) }}</p>
+        </div>
+      </li>
+    </ul>
   </div>
   <table
     mat-table

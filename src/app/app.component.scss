@@ -8,7 +8,7 @@
   margin-top: 20px;
 
   .logo {
-    width: 400px;
+    width: 200px;
     height: auto;
   }
 
@@ -46,5 +46,11 @@
     &.selected {
       border-bottom: 3px solid $aux-color;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .header .logo {
+    width: 400px;
   }
 }
