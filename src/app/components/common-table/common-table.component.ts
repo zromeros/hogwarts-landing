@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FormControl } from '@angular/forms';
 
 type HouseLogoMap = {
@@ -31,13 +30,7 @@ export class CommonTableComponent {
   @Input() loading: boolean = true;
   @Output() dataSourceUpdated = new EventEmitter<any[]>();
 
-  constructor(private breakpointObserver: BreakpointObserver) {
-    this.breakpointObserver
-      .observe([Breakpoints.XSmall])
-      .subscribe((result) => {
-        this.mobile = result.matches;
-      });
-  }
+  constructor() {}
 
   updateDataSource(data: any[]) {
     this.dataSource = data;

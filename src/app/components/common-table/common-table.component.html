@@ -18,17 +18,17 @@
     </div>
   </div>
 
-  <div class="responsive-list" *ngIf="!loading && mobile">
+  <div class="responsive-list" *ngIf="!loading">
     <ul class="custom-ul">
-      <li
-        *ngFor="let content of dataSource"
-        class="custom-li"
-        [class.slytherin]="content.house === 'Slytherin'"
-        [class.gryffindor]="content.house === 'Gryffindor'"
-        [class.ravenclaw]="content.house === 'Ravenclaw'"
-        [class.hufflepuff]="content.house === 'Hufflepuff'"
-      >
-        <div class="circular-image">
+      <li *ngFor="let content of dataSource" class="custom-li">
+        <div
+          class="circular-image"
+          class="circular-image"
+          [class.slytherin]="content.house === 'Slytherin'"
+          [class.gryffindor]="content.house === 'Gryffindor'"
+          [class.ravenclaw]="content.house === 'Ravenclaw'"
+          [class.hufflepuff]="content.house === 'Hufflepuff'"
+        >
           <img
             [src]="content.image"
             alt="{{ content.name }}"
@@ -52,7 +52,7 @@
     mat-table
     [dataSource]="dataSource"
     class="custom-table"
-    *ngIf="!loading && !mobile"
+    *ngIf="!loading"
   >
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Image</th>
