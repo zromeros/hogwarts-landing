@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +8,8 @@ export class AppComponent {
   title = 'hogwarts-landing';
 
   selectedOption: string = 'staff';
+
+  constructor() {}
 
   onOptionSelected(option: string) {
     this.selectedOption = option;

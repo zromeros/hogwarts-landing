@@ -18,11 +18,18 @@
     </div>
   </div>
 
+  <div class="responsive-list" *ngIf="!loading && mobile">
+    <mat-list>
+      <mat-list-item *ngFor="let content of dataSource">
+        <span>{{ content.name }}</span>
+      </mat-list-item>
+    </mat-list>
+  </div>
   <table
     mat-table
     [dataSource]="dataSource"
     class="custom-table"
-    *ngIf="!loading"
+    *ngIf="!loading && !mobile"
   >
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Image</th>

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FormControl } from '@angular/forms';
 
 type HouseLogoMap = {
@@ -19,6 +20,7 @@ const defaultLogo = 'assets/icons/hogwarts.png';
   styleUrls: ['./common-table.component.scss'],
 })
 export class CommonTableComponent {
+  mobile: boolean = false;
   @Input() dataSource: any[] = [];
   @Input() options: string[] = [];
   @Input() optionsTitle: string = '';
@@ -29,7 +31,13 @@ export class CommonTableComponent {
   @Input() loading: boolean = true;
   @Output() dataSourceUpdated = new EventEmitter<any[]>();
 
-  constructor() {}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .subscribe((result) => {
+        this.mobile = result.matches;
+      });
+  }
 
   updateDataSource(data: any[]) {
     this.dataSource = data;

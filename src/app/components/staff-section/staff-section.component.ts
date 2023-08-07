@@ -17,15 +17,14 @@ export class StaffSectionComponent {
   }
 
   fetchStaff(): void {
-    this.isLoading = true; // Inicia el estado de carga
-
+    this.isLoading = true;
     this.staffService.fetchStaff().subscribe(
       (data) => {
         this.staffList = data;
       },
       (error) => {},
       () => {
-        this.isLoading = false; // Finaliza el estado de carga
+        this.isLoading = false;
       }
     );
   }

@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonTableComponent } from '@components/common-table/common-table.component';
 
@@ -19,6 +20,7 @@ import { CommonTableComponent } from '@components/common-table/common-table.comp
     MatSelectModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatListModule,
   ],
   exports: [CommonTableComponent],
 })

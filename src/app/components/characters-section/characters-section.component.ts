@@ -11,6 +11,7 @@ export class CharactersSectionComponent implements OnInit {
   charactersList: any[] = [];
   houses = ['slytherin', 'gryffindor', 'ravenclaw', 'hufflepuff'];
   selectedHouse = new FormControl('gryffindor');
+  isLoading: boolean = false;
 
   constructor(private charactersService: CharactersService) {
     this.selectedHouse.setValue('gryffindor');
@@ -29,9 +30,15 @@ export class CharactersSectionComponent implements OnInit {
   }
 
   fetchCharactersByHouse(house: string | null): void {
-    this.charactersService.fetchCharactersByHouse(house).subscribe((data) => {
-      console.log({ data });
-      this.charactersList = data;
-    });
+    this.isLoading = true;
+    this.charactersService.fetchCharactersByHouse(house).subscribe(
+      (data) => {
+        this.charactersList = data;
+      },
+      (error) => {},
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 }

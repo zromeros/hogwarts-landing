@@ -50,11 +50,7 @@
 </div>
 
 <div class="section-wrapper">
-  <app-staff-section *ngIf="selectedOption === 'staff'"></app-staff-section>
-  <app-students-section
-    *ngIf="selectedOption === 'students'"
-  ></app-students-section>
-  <app-characters-section
-    *ngIf="selectedOption === 'characters'"
-  ></app-characters-section>
+  <app-staff-section *ngIf="selectedOption === 'staff'" />
+  <app-students-section *ngIf="selectedOption === 'students'" />
+  <app-characters-section *ngIf="selectedOption === 'characters'" />
 </div>

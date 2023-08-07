@@ -8,6 +8,7 @@ import { StudentsService } from '@services/students/students.service';
 })
 export class StudentsSectionComponent {
   studentsList: any[] = [];
+  isLoading: boolean = false;
 
   constructor(private studentsService: StudentsService) {}
 
@@ -16,8 +17,15 @@ export class StudentsSectionComponent {
   }
 
   fetchStudents(): void {
-    this.studentsService.fetchStudents().subscribe((data) => {
-      this.studentsList = data;
-    });
+    this.isLoading = true;
+    this.studentsService.fetchStudents().subscribe(
+      (data) => {
+        this.studentsList = data;
+      },
+      (error) => {},
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 }
