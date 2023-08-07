@@ -4,7 +4,7 @@
       Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol";
     font-size: 14px;
-    color: #333;
+    color: #b7b6ab;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -23,8 +23,38 @@
     margin: 0;
   }
 </style>
+
+<div class="header">
+  <img src="assets/icons/harrypotter.png" alt="Título" class="logo" />
+</div>
+
+<div class="option-buttons">
+  <button
+    (click)="onOptionSelected('staff')"
+    [ngClass]="{ selected: isOptionSelected('staff') }"
+  >
+    Staff
+  </button>
+  <button
+    (click)="onOptionSelected('characters')"
+    [ngClass]="{ selected: isOptionSelected('characters') }"
+  >
+    Characters
+  </button>
+  <button
+    (click)="onOptionSelected('students')"
+    [ngClass]="{ selected: isOptionSelected('students') }"
+  >
+    Students
+  </button>
+</div>
+
 <div class="section-wrapper">
-  <app-staff-section />
-  <app-characters-section />
-  <app-students-section />
+  <app-staff-section *ngIf="selectedOption === 'staff'"></app-staff-section>
+  <app-students-section
+    *ngIf="selectedOption === 'students'"
+  ></app-students-section>
+  <app-characters-section
+    *ngIf="selectedOption === 'characters'"
+  ></app-characters-section>
 </div>

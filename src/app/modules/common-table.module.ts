@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CommonTableComponent } from '@components/common-table/common-table.component';
 
 @NgModule({
@@ -15,7 +17,9 @@ import { CommonTableComponent } from '@components/common-table/common-table.comp
     MatInputModule,
     MatTableModule,
     MatSelectModule,
-  ], // Agrega los módulos necesarios aquí
+    MatIconModule,
+    MatProgressSpinnerModule,
+  ],
   exports: [CommonTableComponent],
 })
 export class CommonTableModule {}

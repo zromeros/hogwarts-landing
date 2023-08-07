@@ -8,6 +8,7 @@ import { StaffService } from '@services/staff/staff.service';
 })
 export class StaffSectionComponent {
   staffList: any[] = [];
+  isLoading: boolean = false;
 
   constructor(private staffService: StaffService) {}
 
@@ -16,8 +17,16 @@ export class StaffSectionComponent {
   }
 
   fetchStaff(): void {
-    this.staffService.fetchStaff().subscribe((data) => {
-      this.staffList = data;
-    });
+    this.isLoading = true; // Inicia el estado de carga
+
+    this.staffService.fetchStaff().subscribe(
+      (data) => {
+        this.staffList = data;
+      },
+      (error) => {},
+      () => {
+        this.isLoading = false; // Finaliza el estado de carga
+      }
+    );
   }
 }

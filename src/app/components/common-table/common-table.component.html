@@ -1,52 +1,81 @@
-<div class="common-table">
+<div *ngIf="loading">
+  <div class="custom-loader"></div>
+</div>
+
+<div class="common-table" *ngIf="!loading">
   <div class="common-table-header">
-    <div *ngIf="title" class="table-title">{{ title }}</div>
-    <mat-form-field *ngIf="options.length > 0">
-      <mat-label>{{ optionsTitle }}</mat-label>
-      <mat-select [formControl]="selectedOption">
-        <mat-option *ngFor="let option of options" [value]="option">{{
-          option | titlecase
-        }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="custom-selector" *ngIf="options.length > 0">
+      <label class="custom-label">{{ optionsTitle }}</label>
+      <select class="custom-select" [formControl]="selectedOption">
+        <option
+          *ngFor="let option of options"
+          [value]="option"
+          class="custom-select-option"
+        >
+          {{ option | titlecase }}
+        </option>
+      </select>
+    </div>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="custom-table"
+    *ngIf="!loading"
+  >
     <ng-container matColumnDef="image">
       <th mat-header-cell *matHeaderCellDef>Image</th>
-      <td mat-cell *matCellDef="let staff">
-        <img
-          [src]="staff.image"
-          alt="{{ staff.name }}"
-          width="50"
-          height="50"
-        />
+      <td mat-cell *matCellDef="let content">
+        <div
+          class="circular-image"
+          [class.slytherin]="content.house === 'Slytherin'"
+          [class.gryffindor]="content.house === 'Gryffindor'"
+          [class.ravenclaw]="content.house === 'Ravenclaw'"
+          [class.hufflepuff]="content.house === 'Hufflepuff'"
+        >
+          <img
+            [src]="content.image"
+            alt="{{ content.name }}"
+            width="70"
+            height="70"
+            (error)="content.image = null"
+          />
+          <mat-icon *ngIf="!content.image">account_circle</mat-icon>
+        </div>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let staff">{{ staff.name }}</td>
+      <td mat-cell *matCellDef="let content">{{ content.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="species">
       <th mat-header-cell *matHeaderCellDef>Species</th>
-      <td mat-cell *matCellDef="let staff">{{ staff.species }}</td>
+      <td mat-cell *matCellDef="let content">{{ content.species }}</td>
     </ng-container>
 
     <ng-container matColumnDef="gender">
       <th mat-header-cell *matHeaderCellDef>Gender</th>
-      <td mat-cell *matCellDef="let staff">{{ staff.gender }}</td>
+      <td mat-cell *matCellDef="let content">{{ content.gender }}</td>
     </ng-container>
 
     <ng-container matColumnDef="house">
       <th mat-header-cell *matHeaderCellDef>House</th>
-      <td mat-cell *matCellDef="let staff">{{ staff.house }}</td>
+      <td mat-cell *matCellDef="let content">
+        <div class="house-container">
+          <img [src]="getHouseLogo(content.house)" alt="{{ content.house }}" />
+          <div class="house-name">{{ content.house | titlecase }}</div>
+        </div>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="age">
       <th mat-header-cell *matHeaderCellDef>Age</th>
-      <td mat-cell *matCellDef="let staff">{{ staff.age }}</td>
+      <td mat-cell *matCellDef="let content">
+        {{ getAgeFromYearOfBirth(content.yearOfBirth) }}
+      </td>
     </ng-container>
 
     <tr

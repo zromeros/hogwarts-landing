@@ -30,6 +30,7 @@ export class CharactersSectionComponent implements OnInit {
 
   fetchCharactersByHouse(house: string | null): void {
     this.charactersService.fetchCharactersByHouse(house).subscribe((data) => {
+      console.log({ data });
       this.charactersList = data;
     });
   }

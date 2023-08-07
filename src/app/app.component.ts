@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hogwarts-landing';
+
+  selectedOption: string = 'staff';
+
+  onOptionSelected(option: string) {
+    this.selectedOption = option;
+  }
+
+  isOptionSelected(option: string): boolean {
+    return this.selectedOption === option;
+  }
 }
