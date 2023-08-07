@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 export class CharactersSectionComponent implements OnInit {
   charactersList: any[] = [];
   houses = ['slytherin', 'gryffindor', 'ravenclaw', 'hufflepuff'];
-  selectedHouse = new FormControl('');
+  selectedHouse = new FormControl('gryffindor');
 
   constructor(private http: HttpClient) {
     this.selectedHouse.setValue('gryffindor');
@@ -19,14 +19,25 @@ export class CharactersSectionComponent implements OnInit {
   ngOnInit(): void {
     this.selectedHouse.valueChanges.subscribe((house) => {
       if (house) {
-        this.http
-          .get<any[]>(
-            `https://hp-api.onrender.com/api/characters/house/${house}`
-          )
-          .subscribe((data) => {
-            this.charactersList = data;
-          });
+        this.fetchCharactersByHouse(house);
       }
     });
+    if (this.selectedHouse.value !== null) {
+      this.fetchCharactersByHouse(this.selectedHouse.value);
+    }
+  }
+
+  onDataSourceUpdated(data: any[]) {
+    this.charactersList = data;
+  }
+
+  fetchCharactersByHouse(house: string): void {
+    if (house) {
+      this.http
+        .get<any[]>(`https://hp-api.onrender.com/api/characters/house/${house}`)
+        .subscribe((data) => {
+          this.charactersList = data;
+        });
+    }
   }
 }

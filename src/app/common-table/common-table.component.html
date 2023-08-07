@@ -1,45 +1,64 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="image">
-    <th mat-header-cell *matHeaderCellDef>Image</th>
-    <td mat-cell *matCellDef="let staff">
-      <img [src]="staff.image" alt="{{ staff.name }}" width="50" height="50" />
-    </td>
-  </ng-container>
+<div class="common-table">
+  <div class="common-table-header">
+    <div *ngIf="title" class="table-title">{{ title }}</div>
+    <mat-form-field *ngIf="options.length > 0">
+      <mat-label>{{ optionsTitle }}</mat-label>
+      <mat-select [formControl]="selectedOption">
+        <mat-option *ngFor="let option of options" [value]="option">{{
+          option | titlecase
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let staff">{{ staff.name }}</td>
-  </ng-container>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef>Image</th>
+      <td mat-cell *matCellDef="let staff">
+        <img
+          [src]="staff.image"
+          alt="{{ staff.name }}"
+          width="50"
+          height="50"
+        />
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="species">
-    <th mat-header-cell *matHeaderCellDef>Species</th>
-    <td mat-cell *matCellDef="let staff">{{ staff.species }}</td>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let staff">{{ staff.name }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="gender">
-    <th mat-header-cell *matHeaderCellDef>Gender</th>
-    <td mat-cell *matCellDef="let staff">{{ staff.gender }}</td>
-  </ng-container>
+    <ng-container matColumnDef="species">
+      <th mat-header-cell *matHeaderCellDef>Species</th>
+      <td mat-cell *matCellDef="let staff">{{ staff.species }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="house">
-    <th mat-header-cell *matHeaderCellDef>House</th>
-    <td mat-cell *matCellDef="let staff">{{ staff.house }}</td>
-  </ng-container>
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell *matHeaderCellDef>Gender</th>
+      <td mat-cell *matCellDef="let staff">{{ staff.gender }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="age">
-    <th mat-header-cell *matHeaderCellDef>Age</th>
-    <td mat-cell *matCellDef="let staff">{{ staff.age }}</td>
-  </ng-container>
+    <ng-container matColumnDef="house">
+      <th mat-header-cell *matHeaderCellDef>House</th>
+      <td mat-cell *matCellDef="let staff">{{ staff.house }}</td>
+    </ng-container>
 
-  <tr
-    mat-header-row
-    *matHeaderRowDef="['image', 'name', 'species', 'gender', 'house', 'age']"
-  ></tr>
-  <tr
-    mat-row
-    *matRowDef="
-      let row;
-      columns: ['image', 'name', 'species', 'gender', 'house', 'age']
-    "
-  ></tr>
-</table>
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef>Age</th>
+      <td mat-cell *matCellDef="let staff">{{ staff.age }}</td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="['image', 'name', 'species', 'gender', 'house', 'age']"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="
+        let row;
+        columns: ['image', 'name', 'species', 'gender', 'house', 'age']
+      "
+    ></tr>
+  </table>
+</div>

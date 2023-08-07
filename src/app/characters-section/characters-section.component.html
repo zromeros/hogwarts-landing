@@ -1,15 +1,10 @@
-<mat-form-field>
-  <mat-label>Select House</mat-label>
-  <mat-select [formControl]="selectedHouse">
-    <mat-option *ngFor="let house of houses" [value]="house">{{
-      house | titlecase
-    }}</mat-option>
-  </mat-select>
-</mat-form-field>
-
 <app-common-table
   mat-table
+  [title]="'Characters Section'"
   [dataSource]="charactersList"
+  [options]="houses"
+  [optionsTitle]="'Select House'"
+  [selectedOption]="selectedHouse"
+  (dataSourceUpdated)="onDataSourceUpdated($event)"
   class="mat-elevation-z8"
->
-</app-common-table>
+/>
