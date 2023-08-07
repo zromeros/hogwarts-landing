@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FormControl } from '@angular/forms';
+import { CharactersService } from '@services/characters/characters.service';
 
 @Component({
   selector: 'app-characters-section',
@@ -12,32 +12,25 @@ export class CharactersSectionComponent implements OnInit {
   houses = ['slytherin', 'gryffindor', 'ravenclaw', 'hufflepuff'];
   selectedHouse = new FormControl('gryffindor');
 
-  constructor(private http: HttpClient) {
+  constructor(private charactersService: CharactersService) {
     this.selectedHouse.setValue('gryffindor');
   }
 
   ngOnInit(): void {
     this.selectedHouse.valueChanges.subscribe((house) => {
-      if (house) {
-        this.fetchCharactersByHouse(house);
-      }
+      this.fetchCharactersByHouse(house);
     });
-    if (this.selectedHouse.value !== null) {
-      this.fetchCharactersByHouse(this.selectedHouse.value);
-    }
+
+    this.fetchCharactersByHouse(this.selectedHouse.value);
   }
 
   onDataSourceUpdated(data: any[]) {
     this.charactersList = data;
   }
 
-  fetchCharactersByHouse(house: string): void {
-    if (house) {
-      this.http
-        .get<any[]>(`https://hp-api.onrender.com/api/characters/house/${house}`)
-        .subscribe((data) => {
-          this.charactersList = data;
-        });
-    }
+  fetchCharactersByHouse(house: string | null): void {
+    this.charactersService.fetchCharactersByHouse(house).subscribe((data) => {
+      this.charactersList = data;
+    });
   }
 }

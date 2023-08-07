@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { StudentsService } from '@services/students/students.service';
 
 @Component({
   selector: 'app-students-section',
@@ -9,13 +9,15 @@ import { HttpClient } from '@angular/common/http';
 export class StudentsSectionComponent {
   studentsList: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private studentsService: StudentsService) {}
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://hp-api.onrender.com/api/characters/students')
-      .subscribe((data) => {
-        this.studentsList = data;
-      });
+    this.fetchStudents();
+  }
+
+  fetchStudents(): void {
+    this.studentsService.fetchStudents().subscribe((data) => {
+      this.studentsList = data;
+    });
   }
 }

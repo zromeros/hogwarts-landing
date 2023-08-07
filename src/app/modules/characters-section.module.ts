@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CharactersSectionComponent } from './characters-section.component';
-import { CommonTableModule } from '../common-table/common-table.module';
+import { CharactersSectionComponent } from '@components/characters-section/characters-section.component';
+import { CommonTableModule } from '@modules/common-table.module';
 
 @NgModule({
   declarations: [CharactersSectionComponent],

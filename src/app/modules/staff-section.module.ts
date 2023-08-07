@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { StaffSectionComponent } from './staff-section.component';
-import { CommonTableModule } from '../common-table/common-table.module';
+import { CommonTableModule } from '@modules/common-table.module';
+import { StaffSectionComponent } from '@components/staff-section/staff-section.component';
 
 @NgModule({
   declarations: [StaffSectionComponent],

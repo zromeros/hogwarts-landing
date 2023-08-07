@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { StaffService } from '@services/staff/staff.service';
 
 @Component({
   selector: 'app-staff-section',
@@ -9,14 +9,15 @@ import { HttpClient } from '@angular/common/http';
 export class StaffSectionComponent {
   staffList: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private staffService: StaffService) {}
 
   ngOnInit(): void {
-    this.http
-      .get<any[]>('https://hp-api.onrender.com/api/characters/staff')
-      .subscribe((data) => {
-        this.staffList = data;
-        console.log({ data });
-      });
+    this.fetchStaff();
+  }
+
+  fetchStaff(): void {
+    this.staffService.fetchStaff().subscribe((data) => {
+      this.staffList = data;
+    });
   }
 }
